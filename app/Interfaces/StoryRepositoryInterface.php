@@ -2,11 +2,14 @@
 
 namespace App\Interfaces;
 
-interface CategoryRepositoryInterface
+interface StoryRepositoryInterface
 {
-    public function getAll($filters = [], $paginate = false, $perPage = 10);
+    public function getAll();
     public function getById($id);
     public function create(array $data);
     public function update($id, array $data);
     public function delete($id);
+    public function getCategories($id);
+    public function getChapters($id);
+    public function getPopularStories();
 }

@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up()
 {
-    Schema::create('categories', function (Blueprint $table) {
-        $table->id();
+    Schema::create('chapters', function (Blueprint $table) {
+        $table->id(); // BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY
         $table->string('name');
+        $table->text('content');
+        $table->unsignedBigInteger('id_story');
+        $table->foreign('id_story')->references('id')->on('stories')->onDelete('cascade');
         $table->timestamps();
-    });
+    });       
 }
 
 
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('chapters');
     }
 };

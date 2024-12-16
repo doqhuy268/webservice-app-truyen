@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class AuthorRequest extends FormRequest
 {
     public function authorize()
     {
@@ -14,8 +14,7 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:categories,name,' . $this->id,
-            'description' => 'nullable|string',
+            'name' => 'required|string|max:255|unique:authors,name,' . $this->id,
         ];
     }
 }
