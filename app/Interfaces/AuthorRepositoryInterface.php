@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface CategoryRepositoryInterface
+interface AuthorRepositoryInterface
 {
     public function getAll($filters = [], $paginate = false, $perPage = 10);
     public function getById($id);
