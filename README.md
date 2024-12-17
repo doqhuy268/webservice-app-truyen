@@ -7,59 +7,62 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+Đường link mặc định: 
+http://localhost:8000/
+## API Yêu cầu đăng nhập
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+![image](https://github.com/user-attachments/assets/8cb2a7a0-456f-4bc9-acda-839d64b2922a)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## API Yêu cầu quyền admin
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+![image](https://github.com/user-attachments/assets/463e6802-d6c7-4bb4-bc31-40bdb4928fe4)
 
-## Learning Laravel
+## API Không yêu cầu xác thực
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+![image](https://github.com/user-attachments/assets/79af8da2-ca7f-43cb-ad8d-371f62c16c4b)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 1. API Comment
 
-## Laravel Sponsors
+![image](https://github.com/user-attachments/assets/bd695f73-3c4c-4c87-bf3d-6003a9b49ec7)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
+## 2. API Story
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+![image](https://github.com/user-attachments/assets/eba6737f-fcb8-405e-adfc-b415a281c60d)
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 3. API User
 
-## Code of Conduct
+![image](https://github.com/user-attachments/assets/686b7ad0-c0e0-497a-a811-113c0c0f00c9)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## . API Author
 
-## Security Vulnerabilities
+![image](https://github.com/user-attachments/assets/c1873d5f-a323-4c70-a783-fa622749631b)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+
+## 5. API Category
+
+![image](https://github.com/user-attachments/assets/5c7f5b28-836e-4156-b69b-addc3d722fb3)
+
+## 6. API Chapter
+
+![image](https://github.com/user-attachments/assets/f42cc57c-229b-48ae-89c2-a250f9e6aebb)
+
+
+## 7. API History
+
+![image](https://github.com/user-attachments/assets/6af3df7d-cb92-40a2-8f62-991b1cd94954)
+
+## 8. API Favourite
+
+![image](https://github.com/user-attachments/assets/2a93b50e-d6b8-4ff4-acdf-aa5ceb41ca49)
+
+
+## 9. API 
+
+![image](https://github.com/user-attachments/assets/96628ca6-2399-46ad-b940-c43d3edd2c9d)
+
 
 ## License
 
