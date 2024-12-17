@@ -5,85 +5,64 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use App\Interfaces\UserRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    /**
-     * Constructor để áp dụng middleware bảo vệ route.
-     */
-    public function __construct()
+    protected $userRepository;
+
+    public function __construct(UserRepositoryInterface $userRepository)
     {
-        $this->middleware('auth:sanctum');
+        $this->userRepository = $userRepository;
     }
 
-    /**
-     * [GET] /api/user/{id} - Hiển thị thông tin chi tiết của người dùng.
-     */
+    // Lấy thông tin chi tiết người dùng
     public function show($id)
     {
-        $user = User::with(['favourites', 'comments', 'histories'])->find($id);
+        $user = Auth::user();
 
-        if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
-        }
-
-        return response()->json($user, 200);
-    }
-
-    /**
-     * [PUT] /api/user/{id} - Cập nhật thông tin người dùng.
-     */
-    public function update(UserRequest $request, $id)
-    {
-        $user = User::find($id);
-
-        if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
-        }
-
-        if (auth()->user()->id !== $user->id && auth()->user()->role !== 'admin') {
+        // Người dùng không phải admin chỉ được xem thông tin của chính họ
+        if ($user->role !== 'admin' && $user->id != $id) {
             return response()->json(['message' => 'Unauthorized'], 403);
         }
 
-        $user->update($request->validated());
-
-        return response()->json([
-            'message' => 'Profile updated successfully',
-            'user' => $user,
-        ], 200);
+        $userData = $this->userRepository->getUserById($id);
+        return response()->json($userData);
     }
 
-    /**
-     * [DELETE] /api/user/{id} - Xóa người dùng.
-     */
-    public function destroy($id)
+    // Cập nhật thông tin người dùng
+    public function update(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = Auth::user();
 
-        if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
-        }
-
-        if (auth()->user()->role !== 'admin') {
+        // Người dùng không phải admin chỉ được chỉnh sửa thông tin của chính họ
+        if ($user->role !== 'admin' && $user->id != $id) {
             return response()->json(['message' => 'Unauthorized'], 403);
         }
 
-        $user->delete();
+        $validatedData = $request->validate([
+            'name' => 'sometimes|string',
+            'email' => 'sometimes|email|unique:users,email,' . $id,
+            'password' => 'sometimes|min:6|confirmed',
+            'image' => 'nullable|string',
+        ]);
 
-        return response()->json(['message' => 'User deleted successfully'], 200);
+        $updatedUser = $this->userRepository->updateUser($id, $validatedData);
+        return response()->json(['message' => 'User updated successfully', 'user' => $updatedUser]);
     }
 
-    /**
-     * [GET] /api/users - Lấy danh sách tất cả người dùng (dành cho admin).
-     */
+    // Lấy danh sách người dùng (chỉ admin)
     public function index()
     {
-        if (auth()->user()->role !== 'admin') {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
+        $users = $this->userRepository->getAllUsers();
+        return response()->json($users);
+    }
 
-        $users = User::with(['favourites', 'comments', 'histories'])->get();
-
-        return response()->json($users, 200);
+    // Xóa người dùng (chỉ admin)
+    public function destroy($id)
+    {
+        $this->userRepository->deleteUser($id);
+        return response()->json(['message' => 'User deleted successfully']);
     }
 }

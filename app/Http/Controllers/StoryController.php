@@ -9,53 +9,52 @@ use Illuminate\Http\Request;
 
 class StoryController extends Controller
 {
-    protected $storyRepository;
+    private $storyRepository;
 
     public function __construct(StoryRepositoryInterface $storyRepository)
     {
         $this->storyRepository = $storyRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json($this->storyRepository->getAll(), 200);
+        $stories = $this->storyRepository->getAllStories($request->all());
+        return response()->json(['status' => 'success', 'data' => $stories]);
     }
 
     public function show($id)
     {
-        return response()->json($this->storyRepository->getById($id), 200);
+        $story = $this->storyRepository->getStoryById($id);
+        return response()->json(['status' => 'success', 'data' => $story]);
     }
 
-    public function store(StoryRequest $request)
+    public function store(Request $request)
     {
-        $story = $this->storyRepository->create($request->validated());
-        return response()->json($story, 201);
+        $story = $this->storyRepository->createStory($request->all());
+        return response()->json(['status' => 'success', 'data' => $story], 201);
     }
 
-    public function update(StoryRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $story = $this->storyRepository->update($id, $request->validated());
-        return response()->json($story, 200);
+        $story = $this->storyRepository->updateStory($id, $request->all());
+        return response()->json(['status' => 'success', 'data' => $story]);
     }
 
     public function destroy($id)
     {
-        $this->storyRepository->delete($id);
-        return response()->json(['message' => 'Story deleted successfully'], 200);
+        $this->storyRepository->deleteStory($id);
+        return response()->json(['status' => 'success', 'message' => 'Story deleted successfully.']);
     }
 
-    public function getCategories($id)
+    public function getTrending()
     {
-        return response()->json($this->storyRepository->getCategories($id), 200);
+        $stories = $this->storyRepository->getTrendingStories();
+        return response()->json(['status' => 'success', 'data' => $stories]);
     }
 
-    public function getChapters($id)
+    public function toggleLike($id)
     {
-        return response()->json($this->storyRepository->getChapters($id), 200);
-    }
-
-    public function getPopularStories()
-    {
-        return response()->json($this->storyRepository->getPopularStories(), 200);
+        $story = $this->storyRepository->toggleLike($id);
+        return response()->json(['status' => 'success', 'data' => $story]);
     }
 }

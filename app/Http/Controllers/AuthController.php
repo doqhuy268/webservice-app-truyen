@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -31,7 +31,14 @@ class AuthController extends Controller
 
         return response()->json([
             'token' => $token,
-            'user' => $user,
+            'user' => [
+                'id' => $user->id,
+                'username' => $user->username,
+                'email' => $user->email,
+                'name' => $user->name,
+                'image' => $user->image,
+                'role' => $user->role,
+            ],
         ], 200);
     }
 
@@ -40,43 +47,47 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
+        // Xóa token hiện tại
         $request->user()->currentAccessToken()->delete();
 
         return response()->json(['message' => 'Logged out successfully'], 200);
     }
 
     /**
-    * Đăng ký người dùng mới và tạo token.
-    */
+     * Đăng ký người dùng mới và tạo token.
+     */
     public function register(Request $request)
     {
-    // Validate dữ liệu đầu vào
-    $request->validate([
-        'username' => 'required|string|unique:users,username',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|min:6|confirmed',
-        'name' => 'required|string',
-        'image' => 'nullable|string'
-    ]);
+        $request->validate([
+            'username' => 'required|string|unique:users,username',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|confirmed',
+            'name' => 'required|string',
+            'image' => 'nullable|string'
+        ]);
 
-    // Tạo user mới
-    $user = User::create([
-        'username' => $request->username,
-        'email' => $request->email,
-        'password' => $request->password, // Sẽ tự hash trong model
-        'name' => $request->name,
-        'image' => $request->image ?? null,
-        'role' => 'user', // Mặc định là user
-    ]);
+        $user = User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password), // Hash mật khẩu
+            'name' => $request->name,
+            'image' => $request->image ?? null,
+            'role' => 'user', // Mặc định là user
+        ]);
 
-    // Tạo token cho user mới
-    $token = $user->createToken('api-token')->plainTextToken;
+        $token = $user->createToken('api-token')->plainTextToken;
 
-    // Trả về response
-    return response()->json([
-        'message' => 'User registered successfully',
-        'token' => $token,
-        'user' => $user
-    ], 201);
+        return response()->json([
+            'message' => 'User registered successfully',
+            'token' => $token,
+            'user' => [
+                'id' => $user->id,
+                'username' => $user->username,
+                'email' => $user->email,
+                'name' => $user->name,
+                'image' => $user->image,
+                'role' => $user->role,
+            ],
+        ], 201);
     }
 }
