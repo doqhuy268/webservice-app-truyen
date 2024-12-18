@@ -7,8 +7,78 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+Phiên bản phần mềm
+```
+PHP 8.2.12
+XAMPP 3.3.0
+Laravel Framework 11.35.1
+```
+
+Cấu hình ở file .env
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=book
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+```
+cd webservice-app-truyen-main
+php artisan migrate
+```
+
+Insert dữ liệu vào từ file data.sql
+
+```
+php artisan serve
+```
+
 Đường link mặc định: 
 http://localhost:8000/
+## Lấy token cho API yêu cầu xác thực
+Truy cập http://localhost:8000/api/login
+```
+Method: POST
+Headers: 
+    Key : Accept
+    Value: application/json
+Body:
+    username: admin
+    password: admin
+```
+![image](https://github.com/user-attachments/assets/a176401b-24f0-48a0-ab5d-d5d3422dccb8)
+![image](https://github.com/user-attachments/assets/e6c26ef8-f15f-4b99-9086-7299568be5f0)
+
+## Sử dụng token test API cần quyền admin
+
+Ví dụ thêm tác giả http://localhost:8000/api/authors
+```
+Method: POST
+Authorization:
+    Auth Type: Bearer Token
+    paste token lấy được ở /login vào
+Headers: 
+    Key : Accept
+    Value: application/json
+Body:
+    name: To Huu
+```
+
+![image](https://github.com/user-attachments/assets/99579b04-70a0-4fbf-bca2-9a8849d1a797)
+![image](https://github.com/user-attachments/assets/a9117f67-eb24-466c-9861-dd0effee039a)
+
+## Test API không cầu xác thực
+
+Truy cập vào đường link API không yêu cầu xác thực
+```
+Ví dụ: http://localhost:8000/api/authors
+Method: GET
+```
+![image](https://github.com/user-attachments/assets/9fe2a9a9-de30-459a-9518-b9256f38ef99)
+
+
 ## API Yêu cầu đăng nhập
 
 ![image](https://github.com/user-attachments/assets/8cb2a7a0-456f-4bc9-acda-839d64b2922a)
@@ -36,7 +106,7 @@ http://localhost:8000/
 
 ![image](https://github.com/user-attachments/assets/686b7ad0-c0e0-497a-a811-113c0c0f00c9)
 
-## . API Author
+## 4. API Author
 
 ![image](https://github.com/user-attachments/assets/c1873d5f-a323-4c70-a783-fa622749631b)
 
