@@ -24,20 +24,16 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
+Triển khai
 ```
 cd webservice-app-truyen-main
-php artisan migrate
-```
-
-Insert dữ liệu vào từ file data.sql
-
-```
+php artisan migrate --seed
 php artisan serve
 ```
 
 Đường link mặc định: 
 http://localhost:8000/
-## Lấy token cho API yêu cầu xác thực
+## Lấy token để Test API yêu cầu xác thực
 Truy cập http://localhost:8000/api/login
 ```
 Method: POST
@@ -51,7 +47,7 @@ Body:
 ![image](https://github.com/user-attachments/assets/a176401b-24f0-48a0-ab5d-d5d3422dccb8)
 ![image](https://github.com/user-attachments/assets/e6c26ef8-f15f-4b99-9086-7299568be5f0)
 
-## Sử dụng token test API cần quyền admin
+## Sử dụng token Test API cần quyền admin
 
 Ví dụ thêm tác giả http://localhost:8000/api/authors
 ```
@@ -69,7 +65,7 @@ Body:
 ![image](https://github.com/user-attachments/assets/99579b04-70a0-4fbf-bca2-9a8849d1a797)
 ![image](https://github.com/user-attachments/assets/a9117f67-eb24-466c-9861-dd0effee039a)
 
-## Test API không cầu xác thực
+## Test API không yêu cầu xác thực
 
 Truy cập vào đường link API không yêu cầu xác thực
 ```
